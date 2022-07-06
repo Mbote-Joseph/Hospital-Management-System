@@ -1,0 +1,72 @@
+{% extends 'hospital/homebase.html' %} {% block content %}
+<style>
+  .glow {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000,
+        0 0 40px #000000, 0 0 50px #9554b3, 0 0 60px #9554b3, 0 0 70px #9554b3;
+    }
+
+    to {
+      text-shadow: 0 0 20px #eeeeee, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
+        0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+  }
+</style>
+<br />
+<br />
+
+<div class="jumbotron" style="margin-bottom: 0px">
+  <h1 class="display-4 glow" style="text-align: center">Hello, Patient</h1>
+  <form class="form-group" action="{% url 'search' %}" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-lg-2 my-4"></div>
+      <div class="col-lg-6 my-4">
+        <input
+          class="form-control"
+          type="text"
+          name="name"
+          placeholder="Search"
+        />
+      </div>
+      <div class="col-lg-4 my-4">
+        <input
+          type="submit"
+          class="btn btn-primary"
+          name="submit"
+          value="Search"
+        />
+      </div>
+    </div>
+  </form>
+  <div style="margin-left: 20%">
+    {% for result in results %}
+
+    <span class="badge bg-warning text-dark"># {{result.name}}</span>
+    <!-- <p>{{result.name}}</p> -->
+
+    {% endfor %}
+  </div>
+  <p class="lead glow">Welcome to Smart Health Application.</p>
+  <hr class="my-4" />
+  <p>You can access various features after Login/SignUp.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/patientsignup" role="button"
+      >Register Your Account</a
+    >
+    <a class="btn btn-primary btn-lg" href="/patientlogin" role="button"
+      >Login</a
+    >
+  </p>
+</div>
+
+{% endblock content %}
